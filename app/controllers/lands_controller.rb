@@ -8,6 +8,11 @@ class LandsController < ApplicationController
 
   end
 
+  def import
+  Land.import(params[:file])
+  redirect_to lands_path, notice: "Lands addes succesfully"
+end
+
   private
 
   def set_land

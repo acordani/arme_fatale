@@ -1,2 +1,8 @@
 <h1>Pages#home</h1>
 <p>Find me in app/views/pages/home.html.erb</p>
+
+<h3>Import Lands</h3>
+<%= form_tag import_lands_path, multipart: true do %>
+  <%= file_field_tag :file %>
+  <%= submit_tag "Upload Companies" %>
+<% end %>

@@ -1,6 +1,8 @@
 Rails.application.routes.draw do
 
-  resources :lands, only: [:index, :show]
+  resources :lands, only: [:index, :show] do
+    collection { post :import }
+  end
 
 
   devise_for :users
