@@ -3,6 +3,9 @@
 
 <h3>Import Lands</h3>
 <%= form_tag import_lands_path, multipart: true do %>
-  <%= file_field_tag :file %>
-  <%= submit_tag "Upload Companies" %>
+  <span class="btn btn-large btn-warning btn-file">
+    Choose File
+    <%= file_field_tag :file %>
+  </span>
+  <%= submit_tag "Upload Companies", class: "btn btn-primary" %>
 <% end %>
