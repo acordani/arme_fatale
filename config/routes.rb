@@ -1,4 +1,8 @@
 Rails.application.routes.draw do
+  get 'lands/index'
+
+  get 'lands/show'
+
   devise_for :users
   root to: 'pages#home'
   # The priority is based upon order of creation: first created -> highest priority.
