@@ -1,2 +1,40 @@
-<h1>Lands#index</h1>
-<p>Find me in app/views/lands/index.html.erb</p>
+<div class="row">
+  <div class="col-md-10 col-md-offset-1">
+    <div class="panel panel-default">
+      <div class="panel-heading">
+        Vos resultats
+      </div>
+      <div class="panel-body">
+        <% @lands.each do |land| %>
+          <div class="row">
+            <div class="col-md-2">
+              <%= land.surface %> m2
+            </div>
+            <div class="col-md-5">
+              <h3 class="mt-0"><%= land.address %></h3>
+              <%= land.neighborhood %>
+            </div>
+            <div class="col-md-5 right">
+              <div id="map" >
+                <%= image_tag "https://maps.googleapis.com/maps/api/staticmap?zoom=15&size=200x170&sensor=false&maptype=roadmap&markers=color:red|#{land.full_street_address}", class: "item-show-map" %>
+              </div>
+            </div>
+          </div>
+          <br><hr><br>
+        <% end %>
+      </div>
+    </div>
+  </div>
+</div>
+<% content_for(:js) do %>
+  <script type="text/javascript">
+    $(document).on('ready', function() {
+      handler = Gmaps.build('Google');
+      handler.buildMap({ internal: { id: 'map' } }, function(){
+        markers = handler.addMarkers(<%= raw @hash.to_json %>);
+        handler.bounds.extendWith(markers);
+        handler.fitMapToBounds();
+      });
+    })
+  </script>
+<% end %>
