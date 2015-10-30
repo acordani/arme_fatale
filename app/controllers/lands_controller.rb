@@ -4,16 +4,17 @@ class LandsController < ApplicationController
     @lands = Land.all
     # @land_coordinates = { lat: @land.latitude, lng: @land.longitude }
     # Let's DYNAMICALLY build the markers for the view.
-    @hash = Gmaps4rails.build_markers(@lands) do |land, marker|
-      marker.lat land.latitude
-      marker.lng land.longitude
+
     end
 
 
-  end
+
 
   def show
-
+    @hash = Gmaps4rails.build_markers(@land) do |land, marker|
+      marker.lat land.latitude
+      marker.lng land.longitude
+    end
   end
 
   def import

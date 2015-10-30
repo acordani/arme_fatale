@@ -13,8 +13,9 @@
     <div class="container">
     <%= yield %>
     </div>
-    <%= javascript_include_tag "https://maps.google.com/maps/api/js?sensor=false&key=AIzaSyDj4SplWgT72UCnQrH0e0lvfvGJRKNJjA0" %>
+    <%= javascript_include_tag "https://maps.google.com/maps/api/js?sensor=false&key=AIzaSyCwCp3To_EfAyq9Yt0-x9O2KfQMU4dLRw8" %>
     <%= javascript_include_tag "https://google-maps-utility-library-v3.googlecode.com/svn/tags/markerclustererplus/2.0.14/src/markerclusterer_packed.js" %>
+    <%= javascript_include_tag "https://maps.googleapis.com/maps/api/js?libraries=places" %>
     <%= javascript_include_tag 'application' %>
     <%= yield(:after_js) %>
   </body>

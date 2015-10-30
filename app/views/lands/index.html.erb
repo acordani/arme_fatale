@@ -1,5 +1,5 @@
 <div class="row">
-  <div class="col-md-10 col-md-offset-1">
+  <div class="col-md-12">
     <div class="panel panel-default">
       <div class="panel-heading">
         Vos resultats
@@ -12,11 +12,14 @@
             </div>
             <div class="col-md-5">
               <h3 class="mt-0"><%= land.address %></h3>
-              <%= land.neighborhood %>
+              <p><%= land.neighborhood %></p>
+              <p><%= link_to "En savoir plus", land_path(land) %></p>
+              <p><%= link_to "Accès Direct à Street View", "http://maps.google.com/maps?q=&layer=c&cbll=#{land.latitude},#{land.longitude}", target: "_blank" %></p>
             </div>
             <div class="col-md-5 right">
               <div id="map" >
                 <%= image_tag "https://maps.googleapis.com/maps/api/staticmap?zoom=15&size=200x170&sensor=false&maptype=roadmap&markers=color:red|#{land.full_street_address}", class: "item-show-map" %>
+                <%= image_tag("http://maps.googleapis.com/maps/api/streetview?size=200x170&location=#{land.full_street_address}&fov=180&&pitch=1&sensor=false", class: "item-show-map")%>
               </div>
             </div>
           </div>
@@ -26,15 +29,3 @@
     </div>
   </div>
 </div>
-<% content_for(:js) do %>
-  <script type="text/javascript">
-    $(document).on('ready', function() {
-      handler = Gmaps.build('Google');
-      handler.buildMap({ internal: { id: 'map' } }, function(){
-        markers = handler.addMarkers(<%= raw @hash.to_json %>);
-        handler.bounds.extendWith(markers);
-        handler.fitMapToBounds();
-      });
-    })
-  </script>
-<% end %>

@@ -19,5 +19,5 @@ class Land < ActiveRecord::Base
     [address, city].compact.join(', ')
   end
 
-
 end
+
