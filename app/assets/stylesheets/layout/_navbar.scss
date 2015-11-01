@@ -119,3 +119,13 @@
     margin-right: 10px;
   }
 }
+
+.logo {
+  text-transform: uppercase;
+  letter-spacing: -2px;
+  text-decoration: none;
+
+  .logo a:hover {
+  text-decoration: none !important;
+  }
+}
