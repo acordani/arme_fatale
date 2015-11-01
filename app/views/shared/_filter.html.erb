@@ -1,29 +1,31 @@
-<div class="row">
-    <div class="col-md-12">
-      <div class="filter">
-        <br>
-        <%= form_tag lands_path, method: :get, class: "text-center" do %>
+<div class="container">
+  <div class="row">
+      <div class="col-md-12">
+        <div class="filter">
+          <br>
+          <%= form_tag lands_path, method: :get, class: "text-center" do %>
 
 
 
-          <div class="col-md-3">
-            <%= select_tag :neighborhood,options_for_select(['SAINT-MAUR-CRETEIL','ADAMVILLE','LES MURIERS']), prompt: "Choisissez un quartier", class: "form-control" %>
+            <div class="col-md-3">
+              <%= select_tag(:neighborhood,options_for_select(['SAINT-MAUR-CRETEIL','ADAMVILLE','LES MURIERS'], params[:neighborhood]), prompt: "Choisissez un quartier", class: "form-control") %>
 
-          </div>
+            </div>
 
-          <div class="col-md-3">
-            <%= text_field_tag :min_surface, params[:min_surface], placeholder:"Surface minimum", class: "form-control"%>
-          </div>
+            <div class="col-md-3">
+              <%= text_field_tag :min_surface, params[:min_surface], placeholder:"Surface minimum", class: "form-control"%>
+            </div>
 
-          <div class="col-md-3">
-            <%= text_field_tag :max_surface, params[:max_surface], placeholder:"Surface maximum", class: "form-control" %>
-          </div>
+            <div class="col-md-3">
+              <%= text_field_tag :max_surface, params[:max_surface], placeholder:"Surface maximum", class: "form-control" %>
+            </div>
 
-          <div class="col-md-3">
-            <%= submit_tag "Recherche", name: nil, class: "btn btn-primary" %>
-          </div>
+            <div class="col-md-3">
+              <%= submit_tag "Recherche", name: nil, class: "btn btn-primary" %>
+            </div>
 
-        <% end %>
+          <% end %>
+        </div>
       </div>
     </div>
   </div>
