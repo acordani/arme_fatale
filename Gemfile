@@ -24,6 +24,10 @@ source 'https://rails-assets.org' do
   gem "rails-assets-underscore"
 end
 
+#Paginate
+gem 'will_paginate', '~> 3.0.6'
+gem 'will_paginate-bootstrap'
+
 
 group :development, :test do
   gem 'binding_of_caller'

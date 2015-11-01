@@ -1,7 +1,7 @@
 class LandsController < ApplicationController
   before_action :set_land, only: [:show]
   def index
-    @lands = Land.all
+    @lands = Land.all.paginate(:page => params[:page], :per_page => 10)
     @lands = @lands.where(city: params[:city]) if params["city"].present?
     @lands = @lands.where(neighborhood: params[:neighborhood]) if params["neighborhood"].present?
     @lands = @lands.where("surface >= ?", params[:min_surface]) if params["min_surface"].present?
