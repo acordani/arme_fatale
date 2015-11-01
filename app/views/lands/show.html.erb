@@ -1,27 +1,28 @@
-<div class="row">
-  <div class="col-md-10 col-md-offset-1">
-    <div class="panel panel-default">
-      <div class="panel-heading">
-        <h4>Vue extérieure du <%= @land.full_street_address %></h4>
-      </div>
-      <div class="panel-body">
+ <div class="container">
+  <div class="row">
+    <div class="col-md-10 col-md-offset-1">
+      <div class="panel panel-default">
+        <div class="panel-heading">
+          <h4>Vue extérieure du <%= @land.full_street_address %></h4>
+        </div>
+        <div class="panel-body">
 
-        <%= image_tag("http://maps.googleapis.com/maps/api/streetview?size=700x300&location=#{@land.latitude},#{@land.longitude}&fov=180&&pitch=10&sensor=false", class:"map_show")%>
+          <%= image_tag("http://maps.googleapis.com/maps/api/streetview?size=700x300&location=#{@land.latitude},#{@land.longitude}&fov=180&&pitch=10&sensor=false", class:"map_show")%>
+        </div>
       </div>
-    </div>
-    <div class="panel panel-default">
-      <div class="panel-heading">
-        <h4>Plan du <%= @land.full_street_address %></h4>
-      </div>
-      <div class="panel-body">
+      <div class="panel panel-default">
+        <div class="panel-heading">
+          <h4>Plan du <%= @land.full_street_address %></h4>
+        </div>
+        <div class="panel-body">
 
-        <div id="map2" class="map_show"></div>
+          <div id="map2" class="map_show"></div>
 
+        </div>
       </div>
     </div>
   </div>
 </div>
-
 
 
 <% content_for(:after_js) do %>

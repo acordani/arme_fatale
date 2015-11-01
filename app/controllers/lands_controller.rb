@@ -8,10 +8,11 @@ class LandsController < ApplicationController
     @lands = @lands.where("surface <= ?", params[:max_surface]) if params["max_surface"].present?
     # @land_coordinates = { lat: @land.latitude, lng: @land.longitude }
     # Let's DYNAMICALLY build the markers for the view.
-
     end
 
+    def home
 
+    end
 
 
   def show

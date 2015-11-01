@@ -1,67 +1,41 @@
-<div class="row">
-  <div class="col-md-12">
-    <div class="filter">
-      <br>
-      <%= form_tag lands_path, method: :get, class: "text-center" do %>
+<div class="container">
+  <%= render 'shared/filter' %>
 
+  <br>
 
-
-        <div class="col-md-3">
-          <%= select_tag :neighborhood,options_for_select(['SAINT-MAUR-CRETEIL','ADAMVILLE','LES MURIERS']), prompt: "Choisissez un quartier", class: "form-control" %>
-
-        </div>
-
-        <div class="col-md-3">
-          <%= text_field_tag :min_surface, params[:min_surface], placeholder:"Surface minimum", class: "form-control"%>
-        </div>
-
-        <div class="col-md-3">
-          <%= text_field_tag :max_surface, params[:miax_surface], placeholder:"Surface maximum", class: "form-control" %>
-        </div>
-
-        <div class="col-md-3">
-          <%= submit_tag "Recherche", name: nil, class: "btn btn-primary" %>
-        </div>
-
-      <% end %>
-    </div>
-  </div>
-</div>
-
-<br>
-
-<% if @lands.empty? %>
-  <h3> Il n'y a pas de terrains correspondant à votre recherche </h3>
-<% else %>
-  <div class="row">
-    <div class="col-md-12">
-      <div class="panel panel-default">
-        <div class="panel-heading">
-          <h4 class="text-center">Nous avons trouvé <%= @lands.count %> propriété(s) potentiels correspondant à votre recherche</h4>
-        </div>
-        <div class="panel-body">
-          <% @lands.each do |land| %>
-            <div class="row">
-              <div class="col-md-2">
-                <%= land.surface %> m2
-              </div>
-              <div class="col-md-5">
-                <h3 class="mt-0"><%= land.address %></h3>
-                <p><%= land.neighborhood %></p>
-                <p><%= link_to "En savoir plus", land_path(land) %></p>
-                <p><%= link_to "Accès Direct à Street View", "http://maps.google.com/maps?q=&layer=c&cbll=#{land.latitude},#{land.longitude}", target: "_blank" %></p>
-              </div>
-              <div class="col-md-5 right">
-                <div id="map" >
-                  <%= image_tag "https://maps.googleapis.com/maps/api/staticmap?zoom=15&size=200x170&sensor=false&maptype=roadmap&markers=color:red|#{land.full_street_address}", class: "item-show-map" %>
-                  <%= image_tag("http://maps.googleapis.com/maps/api/streetview?size=200x170&location=#{land.full_street_address}&fov=180&&pitch=1&sensor=false", class: "item-show-map")%>
+  <% if @lands.empty? %>
+    <h3> Il n'y a pas de terrains correspondant à votre recherche </h3>
+  <% else %>
+    <div class="row">
+      <div class="col-md-12">
+        <div class="panel panel-default">
+          <div class="panel-heading">
+            <h4 class="text-center">Nous avons trouvé <%= @lands.count %> propriété(s) potentiels correspondant à votre recherche</h4>
+          </div>
+          <div class="panel-body">
+            <% @lands.each do |land| %>
+              <div class="row">
+                <div class="col-md-2">
+                  <%= land.surface %> m2
+                </div>
+                <div class="col-md-5">
+                  <h3 class="mt-0"><%= land.address %></h3>
+                  <p><%= land.neighborhood %></p>
+                  <p><%= link_to "En savoir plus", land_path(land) %></p>
+                  <p><%= link_to "Accès Direct à Street View", "http://maps.google.com/maps?q=&layer=c&cbll=#{land.latitude},#{land.longitude}", target: "_blank" %></p>
+                </div>
+                <div class="col-md-5 right">
+                  <div id="map" >
+                    <%= image_tag "https://maps.googleapis.com/maps/api/staticmap?zoom=15&size=200x170&sensor=false&maptype=roadmap&markers=color:red|#{land.full_street_address}", class: "item-show-map" %>
+                    <%= image_tag("http://maps.googleapis.com/maps/api/streetview?size=200x170&location=#{land.full_street_address}&fov=180&&pitch=1&sensor=false", class: "item-show-map")%>
+                  </div>
                 </div>
               </div>
-            </div>
-            <br><hr><br>
-          <% end %>
+              <br><hr><br>
+            <% end %>
+          </div>
         </div>
       </div>
     </div>
-  </div>
-<% end %>
+  <% end %>
+</div>

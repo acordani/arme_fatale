@@ -2,3 +2,24 @@
  * SASS code SPECIFIC TO your home page
  * (margin/padding adjustments, background image, etc..)
  * ------------------------------------- */
+
+ .jumbotron {
+  background-image: url('NewYork.jpg');
+  height:800px;
+  margin:0px;
+  background-position: center;
+ }
+
+
+ .filter {
+  margin-top:20px;
+  background-color: rgba(215,226,241,0.9);
+  padding: 2px 30px 60px 30px;
+  border-radius: 10px;
+ }
+
+ h2 {
+  text-transform: uppercase;
+  color: #fff;
+  text-shadow: 0px 2px 3px #555;
+ }
