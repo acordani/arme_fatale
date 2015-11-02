@@ -4,7 +4,8 @@
  * ------------------------------------- */
 
  .jumbotron {
-  background-image: url('NewYork.jpg');
+  position: relative;
+  background-image: image-url('NewYork.jpg');
   height:800px;
   margin:0px;
   background-position: center;
