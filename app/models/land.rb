@@ -5,8 +5,9 @@ class Land < ActiveRecord::Base
   validates :address, presence: true
   validates :neighborhood, presence: true
   validates :city, presence: true
+  validates :file, presence:true
 
-  CITIES = ["SAINT-MAUR-CRETEIL", "LE PARC SAINT-MAUR"]
+
 
   geocoded_by :full_street_address
   after_validation :geocode, if: :address_changed?

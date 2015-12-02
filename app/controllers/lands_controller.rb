@@ -39,6 +39,6 @@ class LandsController < ApplicationController
   end
 
   def land_params
-    params.require(:land).permit(:number, :surface, :address, :neighborhood, :city, :latitude, :longitude)
+    params.require(:land).permit(:number, :surface, :address, :neighborhood, :city, :latitude, :longitude, :file)
   end
 end
