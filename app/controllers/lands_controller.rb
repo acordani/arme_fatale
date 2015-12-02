@@ -1,5 +1,5 @@
 class LandsController < ApplicationController
-  before_action :set_land, only: [:show]
+  before_action :set_land, only: [:show, :destroy]
   def index
     @lands = Land.all.paginate(:page => params[:page], :per_page => 10)
     @lands = @lands.where(city: params[:city]) if params["city"].present?
@@ -25,7 +25,12 @@ class LandsController < ApplicationController
   def import
   Land.import(params[:file])
   redirect_to lands_path, notice: "Les parcelles ont été ajoutées !!"
-end
+  end
+
+  def destroy
+    @land.destroy
+      redirect_to lands_path
+  end
 
   private
 

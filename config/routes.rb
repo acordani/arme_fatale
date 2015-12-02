@@ -1,6 +1,6 @@
 Rails.application.routes.draw do
 
-  resources :lands, only: [:index, :show] do
+  resources :lands, only: [:index, :show, :destroy] do
     collection { post :import }
   end
   get 'pages/home' => 'pages#home'
