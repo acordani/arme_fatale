@@ -23,7 +23,7 @@
                   <h3 class="mt-0"><%= land.address %></h3>
                   <p><%= land.neighborhood %></p>
                   <p><%= link_to "En savoir plus", land_path(land) %></p>
-                  <p><%= link_to "Accès Direct à Street View", "http://maps.google.com/maps?q=&layer=c&cbll=#{land.latitude},#{land.longitude}", target: "_blank" %></p>
+                  <p><%= link_to "Accès Direct à Street View", "http://maps.google.com/maps/place/#{land.full_street_address}", target: "_blank" %></p>
                 </div>
                 <div class="col-md-5 right">
                   <div id="map" >
