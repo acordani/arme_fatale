@@ -8,7 +8,7 @@
         </div>
         <div class="panel-body">
 
-          <%= image_tag("http://maps.googleapis.com/maps/api/streetview?size=700x300&location=#{@land.latitude},#{@land.longitude}&fov=180&&pitch=10&sensor=false", class:"map_show")%>
+          <div id="map2" class="map_show"></div>
         </div>
       </div>
       <div class="panel panel-default">
@@ -17,11 +17,11 @@
         </div>
         <div class="panel-body">
 
-          <div id="map2" class="map_show"></div>
+          <div id="map3" class="map_show"></div>
 
         </div>
       </div>
-    </div>
+
   </div>
 </div>
 
@@ -30,8 +30,36 @@
   <%= javascript_tag do %>
       $(document).on('ready', function() {
 
+        pos = new google.maps.LatLng( <%= @land.latitude %>, <%= @land.longitude %> );
+
+var div = document.getElementById('map2');
+var sv = new google.maps.StreetViewPanorama(div);
+sv.setPosition( pos );
+sv.setVisible( true );
+
+// find the heading by looking from the google car pos to the venue pos
+var service = new google.maps.StreetViewService();
+service.getPanoramaByLocation( pos, 50, function(result, status) {
+    if (status == google.maps.StreetViewStatus.OK)
+    {
+        carPos = result.location.latLng;
+        heading = google.maps.geometry.spherical.computeHeading( carPos, pos );
+        sv.setPov( { heading: heading, pitch: 0, zoom: 1 } );
+    }
+    else {
+    console.log('Street View Noet Available');
+  }
+} );
+      })
+    <% end %>
+  <% end %>
+
+  <% content_for(:after_js) do %>
+  <%= javascript_tag do %>
+      $(document).on('ready', function() {
+
         handler = Gmaps.build('Google');
-        handler.buildMap({ internal: { id: 'map2' }
+        handler.buildMap({ internal: { id: 'map3' }
         }, function(){
           markers = handler.addMarkers(<%= raw @hash.to_json %>);
           handler.bounds.extendWith(markers);
