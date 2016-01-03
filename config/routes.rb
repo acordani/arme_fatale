@@ -1,5 +1,6 @@
 Rails.application.routes.draw do
 
+  ActiveAdmin.routes(self)
   resources :lands, only: [:index, :show, :destroy] do
     collection { post :import }
   end

@@ -28,6 +28,9 @@ end
 gem 'will_paginate', '~> 3.0.6'
 gem 'will_paginate-bootstrap'
 
+#Activ Admin
+gem 'activeadmin', github: 'activeadmin'
+
 
 group :development, :test do
   gem 'binding_of_caller'
