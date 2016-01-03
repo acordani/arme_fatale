@@ -10,6 +10,14 @@ RailsAdmin.config do |config|
   config.authorize_with do |controller|
     redirect_to main_app.root_path unless current_user.admin
   end
+
+  config.model 'User' do
+    list do
+      field :email
+      field :created_at
+      field :admin
+    end
+  end
   ## == Cancan ==
   # config.authorize_with :cancan
 
