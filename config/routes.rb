@@ -1,5 +1,6 @@
 Rails.application.routes.draw do
 
+  mount RailsAdmin::Engine => '/admin', as: 'rails_admin'
   ActiveAdmin.routes(self)
   resources :lands, only: [:index, :show, :destroy] do
     collection { post :import }

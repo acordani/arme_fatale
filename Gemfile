@@ -30,6 +30,7 @@ gem 'will_paginate-bootstrap'
 
 #Activ Admin
 gem 'activeadmin', github: 'activeadmin'
+gem "rails_admin"
 
 
 group :development, :test do
