@@ -36,8 +36,9 @@
                   <%= image_tag "https://maps.googleapis.com/maps/api/staticmap?key=AIzaSyCwCp3To_EfAyq9Yt0-x9O2KfQMU4dLRw8&zoom=15&size=450x400&sensor=false&maptype=roadmap&markers=color:red|#{land.full_street_address}", class: "item-show-map" %>
                 </div>
               </div>
-
-              <%= link_to "Effacer", land_path(land), method: :delete %>
+              <% if current_user.try(:admin?) %>
+               <%= link_to "Effacer", land_path(land), method: :delete %>
+              <% end %>
               <br><hr><br>
             <% end %>
           </div>
