@@ -11,8 +11,8 @@ class Land < ActiveRecord::Base
 
 
 
-  geocoded_by :full_street_address
-  after_validation :geocode, if: :address_changed?
+  # geocoded_by :full_street_address
+  # after_validation :geocode, if: :address_changed?
 
   def self.import(file)
     CSV.foreach(file.path, headers: true) do |row|
