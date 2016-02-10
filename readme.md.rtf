@@ -1,0 +1,87 @@
+{\rtf1\ansi\ansicpg1252\cocoartf1348\cocoasubrtf170
+{\fonttbl\f0\fswiss\fcharset0 Helvetica;\f1\fnil\fcharset0 Monaco;}
+{\colortbl;\red255\green255\blue255;\red47\green180\blue29;\red242\green242\blue242;\red64\green11\blue217;
+}
+\margl1440\margr1440\vieww10800\viewh8400\viewkind0
+\pard\tx720\tx1440\tx2160\tx2880\tx3600\tx4320\tx5040\tx5760\tx6480\tx7200\tx7920\tx8640\pardirnatural
+
+\f0\fs24 \cf0 ### Commentaires\
+\
+\pard\tx560\tx1120\tx1680\tx2240\tx2800\tx3360\tx3920\tx4480\tx5040\tx5600\tx6160\tx6720\pardirnatural
+
+\f1\fs20 \cf2 \cb0 \CocoaLigature0 rails\cf3  generate model Comment content:text land:references\
+\cf2 rake\cf3  db:migrate  \
+\cf2 rails\cf3  g controller comments\
+\
+\pard\tx560\tx1120\tx1680\tx2240\tx2800\tx3360\tx3920\tx4480\tx5040\tx5600\tx6160\tx6720\pardirnatural
+\cf4  \cf2 rails\cf3  g migration AddUserIdToComment user_id:integer\
+\
+\pard\tx560\tx1120\tx1680\tx2240\tx2800\tx3360\tx3920\tx4480\tx5040\tx5600\tx6160\tx6720\pardirnatural
+\cf2 rails\cf3  g migration AddFirstNameToUser first_name:string\
+\
+\cf0 \cb1 - G\'e9n\'e9rer un nouveau Modele Comment avec content:text land:references user:references\
+rails g model Comment content:text land:references user:references\
+rake db:migrate\
+\
+- Modeles\
+land.rb -> has_many :comments\
+user.rb -> has many :comments\
+\
+- D\'e9finir les routes\
+Le formulaire des commentaire sera g\'e9n\'e9r\'e9 directement dans la show page Land donc on va avoir besoin que d\'92une route create.\
+Pas besoin de new car la route new est utilis\'e9 si on avait un formulaire sur une nouvelle page.\
+resources :lands, only: [:index, :show, :destroy] do\
+    resources :comments, only: [:create]\
+  end \
+Il s\'92agit d\'92une route nest\'e9e car on va avoir comme URL:\
+ land_comments POST   /lands/:land_id/comments(.:format)  comments#create\
+\
+- G\'e9nerer le Controller comments\
+rails g controller comments\
+\
+- Remplir le controller comments\
+\
+class CommentsController < ApplicationController\
+\
+  before_action :set_land\
+\
+  def create\
+    @comment = Comment.new(comment_params)\
+    @comment.land = @land\
+    @comment.user = current_user\
+      if @comment.save\
+        redirect_to land_path(@land)\
+      else\
+        render :show\
+      end\
+  end\
+\
+  private\
+\
+  def set_land\
+    @land = Land.find(params[:land_id])\
+  end\
+\
+  def comment_params\
+    params.require(:comment).permit(:content)\
+  end\
+\
+end\
+\
+La m\'e9thode create:\
+On va instancier @comment en prenant en compte les strings params(d\'e9fini ds la methode comment_params)\
+Puis on va Rajouter \'e0 @comment, land. @comment.land = @land\
+@land avait \'e9t\'e9 d\'e9fini ds la m\'e9thode set_land\
+Puis ensuite, on va Rajouter \'e0 @comment user. @comment.user = current_user\
+Ensuite on save le tout.\
+\
+- Puis on va dans la Vue Show page\
+\
+- Puis on va ds le controller show\
+@comment = Comment.new\
+\
+- Puis on ajoute first_name a User:\
+rails g migration AddFirstNameToUser first_name:string\
+\
+\
+}

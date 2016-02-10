@@ -21,9 +21,32 @@
 
         </div>
       </div>
+      <div class="panel-body">
+              <% if @land.comments.blank? %>
+                <h3> Soyez le premier à inserer un commentaire pour cette parcelle </h3>
+              <% else %>
+                <% @land.comments.each do |comment| %>
+                  <div class="row">
+                    <div class="col-md-2">
+                      <%= comment.created_at.strftime('%d %B') %>
+                    </div>
+                    <div class="col-md-2">
+                      <%= "#{comment.user.first_name.capitalize}" %>
+                    </div>
 
-  </div>
-</div>
+                    <div class="col-md-8">
+                      <%= comment.content %>
+                    </div>
+                  </div>
+                <% end %>
+              <% end %>
+              <%= simple_form_for [@land, @comment] do |f| %>
+                <%= f.text_area :content, rows:5, placeholder: "Inserer votre commentaire ici", class: "form-control mt-20" %>
+                <div class="text-center mt-20">
+                  <%= f.button :submit, class:"btn btn-primary" %>
+                </div>
+              <% end %>
+            </div>
 
 
 <% content_for(:after_js) do %>

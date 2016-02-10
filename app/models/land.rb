@@ -7,6 +7,8 @@ class Land < ActiveRecord::Base
   validates :city, presence: true
   validates :file, presence:true
 
+  has_many :comments
+
 
 
   geocoded_by :full_street_address

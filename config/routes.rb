@@ -4,6 +4,7 @@ Rails.application.routes.draw do
   ActiveAdmin.routes(self)
   resources :lands, only: [:index, :show, :destroy] do
     collection { post :import }
+    resources :comments, only: [:create]
   end
   get 'pages/home' => 'pages#home'
 

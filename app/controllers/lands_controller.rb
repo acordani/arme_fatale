@@ -20,6 +20,8 @@ class LandsController < ApplicationController
       marker.lat land.latitude
       marker.lng land.longitude
     end
+
+    @comment = Comment.new
   end
 
   def import
@@ -39,6 +41,6 @@ class LandsController < ApplicationController
   end
 
   def land_params
-    params.require(:land).permit(:number, :surface, :address, :neighborhood, :city, :latitude, :longitude, :file)
+    params.require(:land).permit(:number, :surface, :address, :neighborhood, :city, :latitude, :longitude, :file, :comment)
   end
 end
